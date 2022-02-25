@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.css';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Feed from './Feed';
+import './Home.css';
+import Header from '../../Components/Header';
+import Sidebar from '../../Components/Sidebar';
+import Feed from '../../Components/Feed';
 
 function App () {
   return (

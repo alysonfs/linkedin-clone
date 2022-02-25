@@ -1,8 +1,10 @@
 import React from 'react'
 import './Post.css'
-import InputOption from './InputOption'
-import { ChatOutlined, ThumbUpAltOutlined, ShareOutlined, SendOutlined } from '@mui/icons-material'
-
+import InputOption from '../InputOption'
+import {
+  ChatOutlined, ThumbUpAltOutlined,
+  ShareOutlined, SendOutlined
+} from '@mui/icons-material'
 import { Avatar } from '@mui/material'
 
 function Post ({ name, description, message, photoUrl }) {

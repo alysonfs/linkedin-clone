@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Feed.css'
-import InputOption from './InputOption'
-import Post from './Post'
+import InputOption from '../InputOption'
+import Post from '../Post'
 
 import {
   Create, Image, Subscriptions,
@@ -10,7 +10,7 @@ import {
 import {
   db, addDoc, getDocs,
   collection, serverTimestamp
-} from './firebase'
+} from '../../app/firebase'
 
 function Feed () {
   const [input, setInput] = useState("")
