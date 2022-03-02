@@ -8,16 +8,28 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount'
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
 import ChatIcon from '@mui/icons-material/Chat'
 import NotificationIcon from '@mui/icons-material/Notifications'
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, selectUser } from '../../features/userSlice';
+import { auth } from '../../app/firebase';
 
 function Header () {
+  const dispatch = useDispatch()
+  const user = useSelector(selectUser)
+
+  const logoutOfApp = () => {
+    auth.signOut()
+      .then(() => {
+        dispatch(logout())
+      })
+  }
+
   return (
     <div className='header'>
-
       <div className="header__left">
         <img src="https://img.icons8.com/color/50/000000/linkedin.png" alt="logo linkedin" />
         <div className="header__search">
           <SearchIcon />
-          <input type="text" name="" id="" />
+          <input placeholder='Search' type="text" name="" id="" />
         </div>
       </div>
       <div className="header__right">
@@ -26,7 +38,12 @@ function Header () {
         <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
         <HeaderOption Icon={ChatIcon} title="Message" />
         <HeaderOption Icon={NotificationIcon} title="Notifications" />
-        <HeaderOption avatar="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png" title="Me" />
+        {user &&
+          <HeaderOption
+            avatar={user.photoUrl}
+            title="Me"
+            onClick={logoutOfApp}
+          />}
       </div>
     </div>
   )
