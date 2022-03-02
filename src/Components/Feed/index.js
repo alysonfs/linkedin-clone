@@ -11,8 +11,11 @@ import {
   db, addDoc, getDocs,
   collection, serverTimestamp
 } from '../../app/firebase'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../features/userSlice'
 
 function Feed () {
+  const user = useSelector(selectUser)
   const [input, setInput] = useState("")
   const [posts, setPosts] = useState([])
 
@@ -31,10 +34,10 @@ function Feed () {
     event.preventDefault()
     try {
       addDoc(collection(db, "posts"), {
-        name: 'Ayson Felipe',
-        description: "This is Me",
+        name: user.displayName,
+        description: user.email,
         message: input,
-        photoUrl: '',
+        photoUrl: user.photoUrl,
         timestamp: serverTimestamp()
       })
         .finally(() => {
@@ -66,8 +69,8 @@ function Feed () {
           <InputOption Icon={CalendarViewDay} title="Write article" color="#7fc15e" />
         </div>
       </div>
-      {posts.map(({ id, data: { name, description, message } }) =>
-        <Post key={id} name={name} description={description} message={message} />
+      {posts.map(({ id, data: { name, description, message, photoUrl } }) =>
+        <Post key={id} name={name} description={description} message={message} photoUrl={photoUrl}/>
       )}
 
     </div>
